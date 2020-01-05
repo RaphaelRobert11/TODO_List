@@ -1,0 +1,91 @@
+<!--
+The template defines the view of the component - what is actually rendered.
+In NativeScript applications the template is defined with XML using NativeScript UI elements.
+It is different from HTML. So instead of <input>, <span>, <div> etc. - we have <TextField>, <Label> and layouts.
+The important thing is that although the elements are different - all of the Angular’s template syntax works exactly the same.
+So you can still use template expressions, bindings, templates as well as all the built-in directives.
+-->
+
+<!--
+The ActionBar is the NativeScript common abstraction over the Android ActionBar and iOS NavigationBar.
+http://docs.nativescript.org/ui/action-bar
+-->
+<!-- Action bar originale
+<ActionBar title="Todo List">
+    <ActionItem text="Create" (tap)="create()"></ActionItem>
+</ActionBar> -->
+
+<!--
+The GridLayout arranges its child elements in a table structure of rows and columns.
+A cell can contain multiple child elements, they can span over multiple rows and columns,
+and even overlap each other. The GridLayout has one column and one row by default.
+You can learn more about NativeScript layouts at https://docs.nativescript.org/ui/layout-containers.
+
+These components make use of the NativeScript core theme, which styles them with element selectors.
+The theme also provides a set of helper class names such as p-20, h1, h2, and text-center to enhance styling.
+You can learn more about the NativeScript core theme at https://github.com/nativescript/theme
+-->
+<!--<GridLayout rows="auto, *">
+
+    <GridLayout row="0" columns="*, auto" class="add-bar">
+        <TextField #groceryTextField [(ngModel)]="grocery"
+            hint="Enter a new list..." col="0">
+        </TextField>
+      <Image src="~/app/images/add.png" (tap)="add()" col="1"></Image>
+    </GridLayout>
+
+    <RadListView row="1" [items]="todoList" swipeActions="true"
+        (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
+
+        <ng-template let-item="item">
+            <Label [text]="item.name" class="p-15"></Label>
+        </ng-template>
+
+        <GridLayout *tkListItemSwipeTemplate columns="*, auto">
+            <StackLayout id="delete-view" col="1" (tap)="delete($event)"
+                class="delete-view">
+                <Image src="~/app/images/delete.png"></Image>
+            </StackLayout>
+        </GridLayout>
+    </RadListView> -->
+  
+    <!-- Liste valeur à brut -->
+    <!--<RadListView row="1" [items]="todoList">
+      <ng-template let-item="item">
+        <Label [text]="item.name" class="p-15"></Label>
+      </ng-template>
+    </RadListView>-->
+  
+<!--</GridLayout> -->
+    <!-- Liste valeur à brut 2 -->
+    <!--<ListView [items]="items">
+        <ng-template let-item="item">
+                <Label [nsRouterLink]="['/item', item.id]" [text]="item.name"></Label>
+        </ng-template>
+    </ListView>-->
+
+
+
+
+<!-- Nouvelle action bar -->
+<ActionBar title="Todo List" class="action-bar">
+    <ActionItem android.systemIcon="ic_input_add" android.position="actionBar" (tap)="newTodo()" ></ActionItem>
+    <Label class="" text="Todo List"></Label>
+</ActionBar>
+<StackLayout>
+    <GridLayout *ngFor="let todo of todoList" rows="auto" columns="auto, *, auto, auto">
+        <Label [text]="todo.name"></Label>
+        <Button row="0" col="3" text="supprimer" (tap)="deleteTodo(item)"></Button>
+
+        <!-- <Button row="0" col="2" text="editer" class="fa" (tap)="todo.editing ? doneEditing(todo) : editTodo(todo)"></Button>
+        -->
+        <Button row="0" col="2" text="editer" class="fa" (tap)="todo.editing ? doneEditing(todo) : editTodo(todo)"></Button>
+
+        
+        <!--<Label *ngIf="!todo.editing" row="0" col="1" [text]="todo.name" [class.done]="todo.done" textWrap="true"></Label>
+        <TextField *ngIf="todo.editing" row="0" col="1" hint="Ingresa el nuevo nombre" [(ngModel)]="todo.name"></TextField>
+        -->
+        <!-- <Button row="0" col="2" [text]="todo.editing" class="fa" (tap)="todo.editing ? doneEditing(todo) : editTodo(todo)"></Button> 
+        <Button *ngIf="!todo.editing" row="0" col="3" text="delete" class="fa borrar" (tap)="deleteTodo(todo)"></Button> -->
+    </GridLayout>
+</StackLayout>
